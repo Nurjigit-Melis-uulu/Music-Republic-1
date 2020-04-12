@@ -14,18 +14,18 @@ class Player extends Component {
   state = {
     option_state: {
       open: false,
-      state: "none"
+      state: "none",
     },
     slider_width: {
       full: "100%",
       elapsed: 1,
-      buffered: 0
+      buffered: 0,
     },
     volume_slider_width: "100%",
     slider_focus: false,
     music: null,
     play: false,
-    volume: 1
+    volume: 1,
   };
 
   option_drawer = () => {
@@ -35,27 +35,27 @@ class Player extends Component {
       this.setState({
         option_state: {
           open: true,
-          state: "block"
-        }
+          state: "block",
+        },
       });
     } else {
       this.setState({
         option_state: {
           open: false,
-          state: "none"
-        }
+          state: "none",
+        },
       });
     }
   };
 
-  slider_click = event => {
+  slider_click = (event) => {
     this.slider_check(event);
     this.setState({
-      slider_focus: true
+      slider_focus: true,
     });
   };
 
-  slider_cursor_move = event => {
+  slider_cursor_move = (event) => {
     if (this.state.slider_focus) {
       this.slider_check(event);
     }
@@ -63,11 +63,11 @@ class Player extends Component {
 
   slider_not_focus = () => {
     this.setState({
-      slider_focus: false
+      slider_focus: false,
     });
   };
 
-  slider_check = event => {
+  slider_check = (event) => {
     let size = event.target.getBoundingClientRect();
     let slider_width = this.state.slider_width;
     let music = this.state.music;
@@ -85,7 +85,7 @@ class Player extends Component {
     );
 
     this.setState({
-      slider_width
+      slider_width,
     });
   };
 
@@ -97,7 +97,7 @@ class Player extends Component {
     slider_width.elapsed = elapsed;
 
     this.setState({
-      slider_width
+      slider_width,
     });
 
     this.bufferUpdate();
@@ -111,18 +111,18 @@ class Player extends Component {
     slider_width.buffered = bufferPercent;
 
     this.setState({
-      slider_width
+      slider_width,
     });
   };
 
-  changeVolume = event => {
+  changeVolume = (event) => {
     let volume = +event.target.value;
     let musicVolume = this.state.music;
 
     musicVolume.volume = volume;
 
     this.setState({
-      volume
+      volume,
     });
   };
 
@@ -134,7 +134,7 @@ class Player extends Component {
 
     this.setState({
       music: document.querySelector("#music"),
-      slider_width
+      slider_width,
     });
   }
 
@@ -148,7 +148,7 @@ class Player extends Component {
     }
 
     this.setState({
-      play
+      play,
     });
   };
 
@@ -166,7 +166,7 @@ class Player extends Component {
     let play_button_icon = play_btn_png;
     let music_time = {
       currentTime: "0:00",
-      duration: "0:00"
+      duration: "0:00",
     };
 
     if (this.state.music !== null) {
@@ -176,12 +176,12 @@ class Player extends Component {
 
       music_time = {
         currentTime: this.formatSecondsAsTime(this.state.music.currentTime),
-        duration: dur
+        duration: dur,
       };
     } else {
       music_time = {
         currentTime: "0:00",
-        duration: "0:00"
+        duration: "0:00",
       };
     }
 
@@ -195,7 +195,7 @@ class Player extends Component {
       <div className={classes.Player}>
         <audio preload="true" id="music" onTimeUpdate={this.timeUpdate}>
           <source
-            src="https://mn1.sunproxy.net/file/UHdGQ3p1anBCZU5UL1VSaG13cXM3a1dlUW5vZGg3eEZIT3dhcUQwYVlzamRzYzFlbjZuUW9EdnpkbnBmSERpU0VDVncyRUMrYWl1YWMrUGhMRGJNM2h2UmlHYUxveUZQUmRhUFBXSk1YK2s9/Porno_Graffitti_-_The_Day_(mp3.mn).mp3"
+            src="https://mn1.sunproxy.net/file/UFNaaG1nc0V2cHh1dmM1VzJJNHNGc3ZpbnE1UFh1MnNDTmp1VytESlRhT0NlV2NKYmFETnRRSVMzbkNnOHhRbEpSazBmSXRtSDRaVjA3Ynlab3IvUEN5QXpKR3F6OTRrZlRGNnd4bzZPUFU9/Billie_Eilish_-_bad_guy_(mp3.mn).mp3"
             type="audio/mpeg"
           />
         </audio>

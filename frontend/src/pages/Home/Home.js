@@ -4,6 +4,7 @@ import Header from "../../components/ui/Header/Header";
 import Footer from "../../components/ui/Footer/Footer";
 import Nav from "../../components/ui/Nav/Nav";
 import Drawer from "../../components/Drawer/Drawer";
+import PlayList from "../../components/Playlist/Playlist";
 
 function Home(props) {
   return (
@@ -13,6 +14,7 @@ function Home(props) {
         <Header />
         <div className={classes.content}></div>
         <Footer />
+        <PlayList />
       </div>
       <Drawer />
     </div>
