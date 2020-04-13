@@ -10,7 +10,6 @@ function Nav(props) {
           <img src={logo} alt="logo" />
         </div>
       </div>
-      <div className={classes.navBg}></div>
     </div>
   );
 }

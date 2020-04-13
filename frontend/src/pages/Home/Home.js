@@ -12,9 +12,10 @@ function Home(props) {
       <div className={classes.container}>
         <Nav />
         <Header />
-        <div className={classes.content}></div>
+        <div className={classes.content}>
+          <PlayList />
+        </div>
         <Footer />
-        <PlayList />
       </div>
       <Drawer />
     </div>

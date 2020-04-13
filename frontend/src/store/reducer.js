@@ -1,6 +1,7 @@
 const initialState = {
   albums: null,
   tracks: null,
+  playingTrackIndex: 0,
 };
 
 const reducer = (state = initialState, action) => {
@@ -14,6 +15,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         tracks: action.tracks,
+      };
+    case "ADD_PLAYING_TRACK_INDEX":
+      return {
+        ...state,
+        playingTrackIndex: action.index,
       };
     default:
       return {

@@ -22,16 +22,6 @@
   position: relative;
 }
 
-
-.Nav .navBg {
-  position: absolute;
-  left: 0;
-  top: 0;
-  filter: blur(4px);
-  background-color: #29385896;
-  box-shadow: 0 2px 10px #0000004d;
-}
-
 .Nav .navLogo {
   width: 40px;
   height: 40px;

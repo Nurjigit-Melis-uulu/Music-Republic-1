@@ -1,0 +1,14 @@
+.Playlist {
+  padding: 10px;
+}
+
+.Playlist h2 {
+  color: white;
+  font-weight: 500;
+}
+
+.Playlist .playlist__items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 10px;
+}

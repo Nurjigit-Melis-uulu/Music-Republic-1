@@ -1,0 +1,58 @@
+.Card {
+  min-width: 150px;
+  min-height: 220px;
+  position: relative;
+  background-color: teal;
+}
+
+.Card .Card__info {
+  width: 100%;
+  min-height: 50px;
+  background-color: #476198;
+  box-sizing: border-box;
+  padding: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+}
+
+.Card h3 {
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: capitalize;
+  margin: 2px 0;
+  color: white;
+}
+
+.Card .Card__backdrop {
+  min-width: 150px;
+  min-height: 200px;
+  width: 100%;
+  height: 100%;
+  background-color: #48619966;
+  visibility: hidden;
+}
+
+.Card:hover .Card__backdrop {
+  visibility: visible;
+}
+
+.Card .Card__play_btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  background-color: #f7bc13;
+  position: absolute;
+  top: calc(50% - 30px);
+  left: calc(50% - 30px);
+  z-index: 5;
+}
+
+.Card .Card__play_btn div {
+  width: 100%;
+  height: 100%;
+  background-image: url(../../assets/icons/play-button.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}

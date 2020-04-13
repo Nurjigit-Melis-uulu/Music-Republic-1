@@ -1,5 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
 import classes from "./Player.module.css";
+import axios from "../../../axios";
+
 import play_btn_png from "../../../assets/icons/play-button.png";
 import pause_btn_png from "../../../assets/icons/pause-button.png";
 import prev_btn_png from "../../../assets/icons/prev-button.png";
@@ -12,6 +16,12 @@ import random_png from "../../../assets/icons/random-playing.png";
 
 class Player extends Component {
   state = {
+    track: {
+      index: this.props.playingTrackIndex,
+      mp3: this.props.tracks
+        ? this.props.tracks[this.props.playingTrackIndex].mp3.url
+        : "https://mn1.sunproxy.net/file/UFNaaG1nc0V2cHh1dmM1VzJJNHNGc3ZpbnE1UFh1MnNDTmp1VytESlRhT0NlV2NKYmFETnRRSVMzbkNnOHhRbEpSazBmSXRtSDRaVjA3Ynlab3IvUEN5QXpKR3F6OTRrZlRGNnd4bzZPUFU9/Billie_Eilish_-_bad_guy_(mp3.mn).mp3",
+    },
     option_state: {
       open: false,
       state: "none",
@@ -163,6 +173,8 @@ class Player extends Component {
   };
 
   render() {
+    console.log(this.state.track, this.props.tracks);
+
     let play_button_icon = play_btn_png;
     let music_time = {
       currentTime: "0:00",
@@ -194,10 +206,7 @@ class Player extends Component {
     return (
       <div className={classes.Player}>
         <audio preload="true" id="music" onTimeUpdate={this.timeUpdate}>
-          <source
-            src="https://mn1.sunproxy.net/file/UFNaaG1nc0V2cHh1dmM1VzJJNHNGc3ZpbnE1UFh1MnNDTmp1VytESlRhT0NlV2NKYmFETnRRSVMzbkNnOHhRbEpSazBmSXRtSDRaVjA3Ynlab3IvUEN5QXpKR3F6OTRrZlRGNnd4bzZPUFU9/Billie_Eilish_-_bad_guy_(mp3.mn).mp3"
-            type="audio/mpeg"
-          />
+          <source src={this.state.track.mp3} type="audio/mpeg" />
         </audio>
         <div className={classes.slider_wrapper}>
           <span className={classes.slider_time}>{music_time.currentTime}</span>
@@ -276,4 +285,11 @@ class Player extends Component {
   }
 }
 
-export default Player;
+const mapStateToProps = (state) => {
+  return {
+    tracks: state.tracks,
+    playingTrackIndex: state.playingTrackIndex,
+  };
+};
+
+export default connect(mapStateToProps, null)(Player);
