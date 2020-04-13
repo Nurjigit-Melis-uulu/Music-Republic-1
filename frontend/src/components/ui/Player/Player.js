@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import classes from "./Player.module.css";
-import axios from "../../../axios";
 
 import play_btn_png from "../../../assets/icons/play-button.png";
 import pause_btn_png from "../../../assets/icons/pause-button.png";
