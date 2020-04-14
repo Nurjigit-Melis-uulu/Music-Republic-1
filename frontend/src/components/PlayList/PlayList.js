@@ -5,7 +5,6 @@ import classes from "./Playlist.module.css";
 import Card from "../Card/Card";
 
 function Playlist(props) {
-  console.log(props.tracks);
   let list = "loading";
   let findIdx = (el) => {
     for (let i = 0; i < props.tracks.length; i++) {

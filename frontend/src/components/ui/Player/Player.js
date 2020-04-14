@@ -18,7 +18,8 @@ class Player extends Component {
     track: {
       index: this.props.playingTrackIndex,
       mp3: this.props.tracks
-        ? this.props.tracks[this.props.playingTrackIndex].mp3.url
+        ? "http://localhost" +
+          this.props.tracks[this.props.playingTrackIndex].mp3.url
         : "https://mn1.sunproxy.net/file/UFNaaG1nc0V2cHh1dmM1VzJJNHNGc3ZpbnE1UFh1MnNDTmp1VytESlRhT0NlV2NKYmFETnRRSVMzbkNnOHhRbEpSazBmSXRtSDRaVjA3Ynlab3IvUEN5QXpKR3F6OTRrZlRGNnd4bzZPUFU9/Billie_Eilish_-_bad_guy_(mp3.mn).mp3",
     },
     option_state: {
@@ -172,8 +173,6 @@ class Player extends Component {
   };
 
   render() {
-    console.log(this.state.track, this.props.tracks);
-
     let play_button_icon = play_btn_png;
     let music_time = {
       currentTime: "0:00",
@@ -205,7 +204,12 @@ class Player extends Component {
     return (
       <div className={classes.Player}>
         <audio preload="true" id="music" onTimeUpdate={this.timeUpdate}>
-          <source src={this.state.track.mp3} type="audio/mpeg" />
+          <source
+            src={
+              "http://localhost:1337/uploads/2b7bb6ae95db4e0b838655e1cf907d3a.mp3"
+            }
+            type="audio/mpeg"
+          />
         </audio>
         <div className={classes.slider_wrapper}>
           <span className={classes.slider_time}>{music_time.currentTime}</span>
