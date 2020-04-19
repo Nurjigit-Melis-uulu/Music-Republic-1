@@ -16,6 +16,8 @@ function Footer(props) {
         <a
           href="https://github.com/SonunDevs"
           title="https://github.com/SonunDevs"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           SonunDevs
         </a>
