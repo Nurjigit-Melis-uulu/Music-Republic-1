@@ -9,7 +9,9 @@ import prev_btn_png from "../../../assets/icons/prev-button.png";
 import next_btn_png from "../../../assets/icons/next-button.png";
 import option_btn_png from "../../../assets/icons/option-button.png";
 import arrow_btn_png from "../../../assets/icons/arrow-button.png";
-import volume_png from "../../../assets/icons/volume.png";
+import volume_full_png from "../../../assets/icons/volume.png";
+import volume_mid_png from "../../../assets/icons/volume_mid.png";
+import volume_null_png from "../../../assets/icons/volume_null.png";
 import repeate_png from "../../../assets/icons/repeate.png";
 import random_png from "../../../assets/icons/random-playing.png";
 
@@ -38,6 +40,7 @@ class Player extends Component {
     volume: 1,
   };
 
+  // показ и скрытие окошка дополнительных опций
   option_drawer = () => {
     let open = !this.state.option_state.open;
 
@@ -77,6 +80,7 @@ class Player extends Component {
     });
   };
 
+  // проверка позиций слайдера
   slider_check = (event) => {
     let size = event.target.getBoundingClientRect();
     let slider_width = this.state.slider_width;
@@ -99,6 +103,7 @@ class Player extends Component {
     });
   };
 
+  // функция обновление проигранного части аудио
   timeUpdate = () => {
     let music = this.state.music;
     let slider_width = this.state.slider_width;
@@ -113,6 +118,7 @@ class Player extends Component {
     this.bufferUpdate();
   };
 
+  // функция обновление буферазации аудио
   bufferUpdate = () => {
     let music = this.state.music;
     let slider_width = this.state.slider_width;
@@ -125,6 +131,7 @@ class Player extends Component {
     });
   };
 
+  // функция изменение громкости звука
   changeVolume = (event) => {
     let volume = +event.target.value;
     let musicVolume = this.state.music;
@@ -136,18 +143,7 @@ class Player extends Component {
     });
   };
 
-  componentDidMount() {
-    let slider_width = this.state.slider_width;
-    slider_width.full = document
-      .querySelector("#slider_box")
-      .getBoundingClientRect().width;
-
-    this.setState({
-      music: document.querySelector("#music"),
-      slider_width,
-    });
-  }
-
+  // функция проигрывание
   play_btn_func = () => {
     let play = !this.state.play;
 
@@ -162,6 +158,7 @@ class Player extends Component {
     });
   };
 
+  // форматирование времени аудио
   formatSecondsAsTime = (secs, format) => {
     var hr = Math.floor(secs / 3600);
     var min = Math.floor((secs - hr * 3600) / 60);
@@ -172,13 +169,38 @@ class Player extends Component {
     return min + ":" + sec;
   };
 
+  componentDidMount() {
+    let slider_width = this.state.slider_width;
+    slider_width.full = document
+      .querySelector("#slider_box")
+      .getBoundingClientRect().width;
+
+    this.setState({
+      music: document.querySelector("#music"),
+      slider_width,
+    });
+  }
+
+  // функция приглушение звука
+  volume_toggle = () => {
+    let music = this.state.music;
+    if (music.muted) {
+      music.muted = false;
+    } else {
+      music.muted = true;
+    }
+  };
+
   render() {
     let play_button_icon = play_btn_png;
+    let volume_png = volume_full_png;
+    let music = this.state.music;
     let music_time = {
       currentTime: "0:00",
       duration: "0:00",
     };
 
+    // условии времени музыки
     if (this.state.music !== null) {
       let dur = this.formatSecondsAsTime(this.state.music.duration);
 
@@ -195,10 +217,22 @@ class Player extends Component {
       };
     }
 
+    // условии для изменения иконки проигрывание
     if (this.state.play) {
       play_button_icon = pause_btn_png;
     } else {
       play_button_icon = play_btn_png;
+    }
+
+    // условии для изменения иконки громкости
+    if (music && music.muted) {
+      volume_png = volume_null_png;
+    } else if (this.state.volume > 0.5) {
+      volume_png = volume_full_png;
+    } else if (this.state.volume <= 0.5 && this.state.volume > 0) {
+      volume_png = volume_mid_png;
+    } else if (this.state.volume === 0) {
+      volume_png = volume_null_png;
     }
 
     return (
@@ -257,12 +291,16 @@ class Player extends Component {
           >
             <div className={classes.volume_box}>
               <button className={classes.volume}>
-                <img src={volume_png} alt="volume button" />
+                <img
+                  src={volume_png}
+                  alt="volume button"
+                  onClick={this.volume_toggle}
+                />
               </button>
               <div className={classes.volume_slider_wrapper}>
                 <input
                   type="range"
-                  step="0.1"
+                  step="0.01"
                   max="1"
                   min="0"
                   onChange={this.changeVolume}
